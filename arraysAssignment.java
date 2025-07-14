@@ -72,6 +72,30 @@ public class arraysAssignment{
         System.out.print(arr[i]+" ");
         }
        }
+       //optimised trapped rainwater
+       public static int trappedWaterOptimised(int arr[]){
+        int left=0;
+        int right=0;
+        int end=arr.length;
+        int water=0;
+        int trappedWater=0;
+        int n=arr.length;
+        for(int i=0;i<arr.length;i++){
+            //calculating water for each bar
+            int boundary=Math.min(left,right);
+            water=(boundary-arr[i])*1;
+            water=water<0?0:water;
+            trappedWater+=water;
+            if(arr[i]>left){
+                left=arr[i];
+            }
+            if(arr[end-1-i]>right){
+                right=arr[end-1-i];
+            }
+        } 
+        return trappedWater;
+
+       }
 
     //    Question 4:There is an integer array nums sorted in ascending order (with distinct values).Prior 
     //    to being passed to your function, nums is possibly rotated at an unknown pivot  index k (1  <=  k  <  nums.length)  such  that  the  resulting  array  is [nums[k], nums[k+1],   ...,   nums[n-1], nums[0],   nums[1],   ...,   nums[k-1]] (0-indexed).   For   example, [0,1,2,4,5,6,7] might        be        rotated        at        pivot        index 3   and become [4,5,6,7,0,1,2].Given the array nums after the possible rotation and 
@@ -108,18 +132,22 @@ public class arraysAssignment{
         }
         return -1;
         }
-    
+     
+
+
     
        
     public static void main(String args[]){
-        int nums[]={1, 1, 1, 3, 3, 4, 3, 2, 4, 2};
-      System.out.println(isrepeated(nums));
-      int prices[]={7, 6, 4,  3, 1};
-      System.out.println(calculateStockProfit(prices));
+    //     int nums[]={1, 1, 1, 3, 3, 4, 3, 2, 4, 2};
+    //   System.out.println(isrepeated(nums));
+    //   int prices[]={7, 6, 4,  3, 1};
+    //   System.out.println(calculateStockProfit(prices));
       int arr[]={4, 2, 0, 3, 2, 5};
+     System.out.println(trappedWaterOptimised(arr));
      System.out.println(trappedWater(arr));
-     int rotatedSortedArr[]={4,5,6,7,8,0,1,2,3};
-     System.out.println(pivotSearch(rotatedSortedArr,90));
+    //  int rotatedSortedArr[]={4,5,6,7,8,0,1,2,3};
+    //  System.out.println(pivotSearch(rotatedSortedArr,90));
+     
         
     }
 }
