@@ -33,7 +33,7 @@ public class arraysAssignment{
             return max_profit<0? 0: max_profit;
     } 
 
-    // Question 4:Given n non-negative integers representing an elevation map where the width of
+    // Question 3:Given n non-negative integers representing an elevation map where the width of
     //  each bar is 1, compute how much water it can trap after raining
        public static int trappedWater(int height[]){
           int n=height.length;
@@ -72,6 +72,45 @@ public class arraysAssignment{
         System.out.print(arr[i]+" ");
         }
        }
+
+    //    Question 4:There is an integer array nums sorted in ascending order (with distinct values).Prior 
+    //    to being passed to your function, nums is possibly rotated at an unknown pivot  index k (1  <=  k  <  nums.length)  such  that  the  resulting  array  is [nums[k], nums[k+1],   ...,   nums[n-1], nums[0],   nums[1],   ...,   nums[k-1]] (0-indexed).   For   example, [0,1,2,4,5,6,7] might        be        rotated        at        pivot        index 3   and become [4,5,6,7,0,1,2].Given the array nums after the possible rotation and 
+    //    an integer target, returnthe index oftarget if it is in nums, or -1   if it is not in nums.
+    public static int pivotSearch(int arr[],int target){
+        int start=0;
+        int end=arr.length-1;
+        while(start<=end){
+            int mid=(start+end)/2;
+            if(arr[mid]==target){
+                return mid;
+            }
+            else if(arr[start]<=arr[mid]){//check is left half is sorted
+                  if(arr[start]<=target && target<=arr[mid]){//check is key lies within the left sorted part
+                      //if key lies in it then discard the right part
+                      end=mid-1;
+                  }else{
+                    //if it is sorted but key doesn't lies within it
+                    //discard the left part
+                    start=mid+1;
+                  }
+            }
+            else{//right half is sorted
+             //check is key lies within it
+             if(arr[mid]<=target && target<=arr[end]){
+                //if it lies then discard the left part
+                start=mid+1;
+             }else{
+                //if not lies
+                end=mid-1;
+             }
+
+            }
+        }
+        return -1;
+        }
+    
+    
+       
     public static void main(String args[]){
         int nums[]={1, 1, 1, 3, 3, 4, 3, 2, 4, 2};
       System.out.println(isrepeated(nums));
@@ -79,6 +118,8 @@ public class arraysAssignment{
       System.out.println(calculateStockProfit(prices));
       int arr[]={4, 2, 0, 3, 2, 5};
      System.out.println(trappedWater(arr));
+     int rotatedSortedArr[]={4,5,6,7,8,0,1,2,3};
+     System.out.println(pivotSearch(rotatedSortedArr,90));
         
     }
 }
